@@ -1,3 +1,5 @@
+//connects this frontend code to the backend database by setting a proxy port for the backend in package.json and running both ports simultaneously
+
 import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import loginService from './services/login'
@@ -20,8 +22,7 @@ useEffect(() => {
     )  
   }, [])
 
-
-  
+//handles the permanent storage of the login  
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
     if (loggedUserJSON) {
@@ -31,6 +32,7 @@ useEffect(() => {
     }
   }, [])
 
+  //saves the blog object which has the format for the blog data
   const addBlog = (event) => {
     event.preventDefault()
     const blogObject = {
@@ -49,6 +51,7 @@ useEffect(() => {
       })
   }
 
+//handles input values based on each keystroke by the user
   const handleBlogTitleChange = (event) => {
     setNewBlogTitle(event.target.value)
   }
@@ -61,6 +64,7 @@ useEffect(() => {
     setNewBlogUrl(event.target.value)
   }
 
+//handles the login
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
@@ -81,8 +85,7 @@ useEffect(() => {
       }, 5000)
     }
   }
-
-
+//this is the login form to have access to create blogs
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <h3>log in to application</h3>
@@ -108,6 +111,7 @@ useEffect(() => {
     </form>      
   )
   
+//this is displayed only if the login data entered by the user is correct
   const blogForm = () => (
     <form onSubmit={addBlog}>
      <div>
@@ -134,11 +138,11 @@ useEffect(() => {
 
   return (
     <div>
-      
-      
+      {/* conditional rendering which displays blog details for logged in user and otherwise for users with wrong login details       */}
 {!user && loginForm()} 
       {user && <div>
         <h2>Blogs</h2>
+          {/* (`a new blog ${blogs} added`) */}
         <p>{user.name} logged in <button>logout</button></p>
           {blogForm()}
           {blogs.map(blog =>

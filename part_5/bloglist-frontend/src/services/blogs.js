@@ -1,3 +1,4 @@
+//The token returned with a successful login is saved to the application's state - the user's field token
 import axios from 'axios'
 const baseUrl = '/api/blogs'
 

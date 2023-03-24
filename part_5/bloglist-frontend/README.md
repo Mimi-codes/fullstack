@@ -1,0 +1,1 @@
+Learnt about handling login in frontend. This entails setting proxy port to set a connection between the frontend and the backend code/database. To be updated later.

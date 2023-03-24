@@ -146,7 +146,7 @@ useEffect(() => {
         <p>{user.name} logged in <button>logout</button></p>
           {blogForm()}
           {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} /> 
       )}
 
         </div>

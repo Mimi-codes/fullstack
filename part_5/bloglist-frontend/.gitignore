@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 /setupProxy.js
-test.js
+/test.js
 
 # testing
 /coverage

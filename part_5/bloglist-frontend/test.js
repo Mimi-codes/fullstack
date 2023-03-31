@@ -273,3 +273,23 @@ return (
      </div>
    )
  }
+
+  //local storage saves the user's login detail even when the browser is refreshed. This is achieved by saving a value corresponding to a certain key to the database with the method setItem and the value of a key can be found with the method getItem.
+  //here, using the useEffect hook, the application checks if user details of a logged-in user can already be found on the local storage. If they can, the details are saved to the state of the application and to blogService.
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, [])
+  //log out button
+
+const logOutUser = () => {
+  // const logout =  window.localStorage.removeItem('loggedBlogappUser')
+  return (
+    <button type='button'>log out</button>
+
+  )
+}

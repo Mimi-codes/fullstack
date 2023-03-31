@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
+import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -18,7 +19,19 @@ const App = () => {
   )  
 }, [])
 
+//local storage saves the user's login detail even when the browser is refreshed. This is achieved by saving a value corresponding to a certain key to the database with the method setItem and the value of a key can be found with the method getItem.
+  //here, using the useEffect hook, the application checks if user details of a logged-in user can already be found on the local storage. If they can, the details are saved to the state of the application and to blogService.
+useEffect(() => {
+  const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+  if (loggedUserJSON) {
+    const user = JSON.parse(loggedUserJSON)
+    setUser(user)
+    blogService.setToken(user.token)
+  }
+}, [])
+
 //event listeners
+//this event handler is responsible for login and must be changed to call the method noteService.setToken(user.token) with a successful login
 const handleLogin = async (e) => {
   e.preventDefault()
   // method for handling the login
@@ -28,6 +41,7 @@ const handleLogin = async (e) => {
     const user = await loginService.login({
       username, password,
     })
+    //setToken imported from blog.js and changes the value of private variable token in blog.js module 
     blogService.setToken(user.token)
     setUser(user)
     setUsername('')
@@ -78,7 +92,7 @@ const handleLogin = async (e) => {
     )
   }
 
-  ////helper function that shows the form for adding new blogs only if the user 
+  //helper function that shows the form for adding new blogs only if the user 
   const blogForm = () => {
     return (
     <form onSubmit={addBlog}>
@@ -91,6 +105,8 @@ const handleLogin = async (e) => {
   return (
     <>
     <h2>Blogs</h2>
+    {/* passes errorMessage as a prop to message which is then also passed as a prop to Notification component  */}
+    <Notification message={errorMessage}/>
       {/* line 94 only shows the login form if the user is not logged in   */}
 {!user && loginForm()} 
 {/* line 97 shows the logged in user's name(generated from the backend), the blogForm and existing blogs */}

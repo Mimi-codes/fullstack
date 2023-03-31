@@ -1,5 +1,5 @@
 import React from 'react'
-
+//message passed as a prop from app.js
 const Notification = ({message}) => {
 const notificationStyle = {
         color: 'green',

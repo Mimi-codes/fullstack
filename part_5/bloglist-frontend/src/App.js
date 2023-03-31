@@ -11,6 +11,9 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [newBlog, setNewBlog] = useState('')
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
 
  //fetches the blogs data
  useEffect(() => {
@@ -68,10 +71,6 @@ const handleLogin = async (e) => {
      //helper function that shows the form for adding new blogs only if the user is logged-in, so user contains the user details
   //event listener 
     
-  const handleBlogChange = (e) => {
-    setNewBlog(e.target.value)
-      }
-    
 
   //helper function that shows only if the user is not logged-in 
   const loginForm = () => {
@@ -79,10 +78,10 @@ const handleLogin = async (e) => {
     return(
      <form onSubmit={handleLogin}>
      <div>
-       username <input type='text' value={username} onChange={handleUsername} />
+       username <input type='text' onChange={handleUsername} />
      </div>
      <div>
-       password  <input type='password' value={password} onChange={handlePassword} />
+       password  <input type='password' onChange={handlePassword} />
      </div>
      <button type="submit">login</button>
    </form>
@@ -92,29 +91,43 @@ const handleLogin = async (e) => {
 
   //helper function that shows the form for adding new blogs only if the user 
 
-  const addBlog = (e, title, author, url) => {
+  const addBlog = (e) => {
     e.preventDefault()
     const blogObject = {
-      "title": title,
-      "author": author,
-      "url": url
+      title,
+      author,
+      url
     }
+    // console.log('button clicked', e.target)
   
     blogService
     .create(blogObject)
     .then(returnedBlog => {
       setBlogs(blogs.concat(returnedBlog))
-      setNewBlog('')
+      // setNewBlog('')
     })
   }
 
   const blogForm = () => {
+    const titleHandler = (e) => {
+setTitle(e.target.value)
+    }
+
+    const authorHandler = (e) => {
+     setAuthor(e.target.value)
+          }
+
+          const urlHandler = (e) => {
+            setUrl(e.target.value)
+                }
+
     return (
-      <>      <h2>create new</h2>
+      <>   
+         <h2>create new</h2>
     <form onSubmit={addBlog}>
-     title:<input type='text'/> <br/>
-     author: <input type='text' /> <br/>
-     url: <input type='text' /> <br/>
+     title:<input type='text' value={title} onChange={titleHandler}/> <br/>
+     author: <input type='text' value={author} onChange={authorHandler} /> <br/>
+     url: <input type='text' value={url} onChange={urlHandler} /> <br/>
       {/* <input value={newBlog} onChange={handleBlogChange} /> */}
       <button type='submit'>save</button>
     </form>

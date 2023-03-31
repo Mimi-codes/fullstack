@@ -47,7 +47,7 @@ const handleLogin = async (e) => {
     setUsername('')
     setPassword('')
   } catch (exception) {
-    setErrorMessage('Wrong credentials')
+    setErrorMessage('wrong username or password')
     setTimeout(() => {
       setErrorMessage(null)
     }, 5000)
@@ -67,9 +67,6 @@ const handleLogin = async (e) => {
     
      //helper function that shows the form for adding new blogs only if the user is logged-in, so user contains the user details
   //event listener 
-  const addBlog = (e) => {
-    e.preventDefault()
-      }
     
   const handleBlogChange = (e) => {
     setNewBlog(e.target.value)
@@ -92,16 +89,45 @@ const handleLogin = async (e) => {
     )
   }
 
+
   //helper function that shows the form for adding new blogs only if the user 
+
+  const addBlog = (e, title, author, url) => {
+    e.preventDefault()
+    const blogObject = {
+      "title": title,
+      "author": author,
+      "url": url
+    }
+  
+    blogService
+    .create(blogObject)
+    .then(returnedBlog => {
+      setBlogs(blogs.concat(returnedBlog))
+      setNewBlog('')
+    })
+  }
+
   const blogForm = () => {
     return (
+      <>      <h2>create new</h2>
     <form onSubmit={addBlog}>
-      <input value={newBlog} onChange={handleBlogChange} />
+     title:<input type='text'/> <br/>
+     author: <input type='text' /> <br/>
+     url: <input type='text' /> <br/>
+      {/* <input value={newBlog} onChange={handleBlogChange} /> */}
       <button type='submit'>save</button>
     </form>
+    </>
     ) 
   }
 
+  //handles logging out of user
+  const handleLogout = () => {
+    window.localStorage.removeItem('loggedBlogappUser')
+    setUser(null)
+  }
+  
   return (
     <>
     <h2>Blogs</h2>
@@ -111,7 +137,7 @@ const handleLogin = async (e) => {
 {!user && loginForm()} 
 {/* line 97 shows the logged in user's name(generated from the backend), the blogForm and existing blogs */}
 {user && <div>
-  <p>{user.name} is logged in</p>
+  <p>{user.name} is logged in <button onClick={handleLogout}>logout</button></p>
   {blogForm()}
   {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />

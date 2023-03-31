@@ -50,6 +50,7 @@ const handleLogin = async (e) => {
     setUsername('')
     setPassword('')
   } catch (exception) {
+    //display notification for wrong login details
     setErrorMessage('wrong username or password')
     setTimeout(() => {
       setErrorMessage(null)
@@ -90,7 +91,7 @@ const handleLogin = async (e) => {
 
 
   //helper function that shows the form for adding new blogs only if the user 
-
+//blog object
   const addBlog = (e) => {
     e.preventDefault()
     const blogObject = {
@@ -106,6 +107,11 @@ const handleLogin = async (e) => {
       setBlogs(blogs.concat(returnedBlog))
       // setNewBlog('')
     })
+    //display notification for added blog for 5secs
+    setErrorMessage(`a new blog ${title} by ${user.name} added`)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, 5000)
   }
 
   const blogForm = () => {

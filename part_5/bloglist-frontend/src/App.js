@@ -15,7 +15,7 @@ const App = () => {
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
 
- //fetches the blogs data
+ //fetches the blogs data from database
  useEffect(() => {
   blogService.getAll().then(blogs =>
     setBlogs( blogs )

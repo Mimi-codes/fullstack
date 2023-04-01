@@ -15,7 +15,7 @@ const Blog = ({blog}) => {
     <ViewToggle buttonLabel='view'>
   https://{blog.url}/ <br/>
    likes {blog.likes} <button type="button">like</button> <br />
-    {blog.author}<br/>
+    {/* {blog.author}<br/> */}
     </ViewToggle>
   </div>  
 )

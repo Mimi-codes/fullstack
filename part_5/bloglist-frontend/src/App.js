@@ -97,6 +97,7 @@ const loginCancelHandler = (e) => {
   
 
    //blog object
+   
   const addBlog = (e) => {
     e.preventDefault();
     const blogObject = {
@@ -116,7 +117,6 @@ const loginCancelHandler = (e) => {
       setErrorMessage(null);
     }, 5000);
   };
-
 
   //handles logging out of user
   const handleLogout = () => {
@@ -149,7 +149,7 @@ const loginCancelHandler = (e) => {
           </p>
           <Togglable buttonLabel='blog form'>
     <BlogForm 
-    onSubmit={addBlog}
+    addBlog={addBlog}
     titleValue ={title}
     handleTitleChange = {titleHandler}
     authorValue = {author}
@@ -161,6 +161,7 @@ const loginCancelHandler = (e) => {
           {blogs.map((blog) => (
             <Blog key={blog.id} blog={blog} />
           ))}
+          
         </div>
       )}
     </>

@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 
-const BlogForm = ({blogObject, onSubmit, titleValue, handleTitleChange, authorValue, handleAuthorChange, urlValue, handleUrlChange}) => {
+const BlogForm = ({ addBlog, titleValue, handleTitleChange, authorValue, handleAuthorChange, urlValue, handleUrlChange}) => {
   const [newBlog, setNewBlog] = useState('')
   
+
   return (
     <>
       <h2>create a new blog</h2>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={addBlog}>
           title:
           <input type="text" value={titleValue} onChange={handleTitleChange} /> <br />
           author: <input

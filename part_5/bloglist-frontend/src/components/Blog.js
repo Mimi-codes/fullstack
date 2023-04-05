@@ -25,7 +25,9 @@ const Blog = ({blog, handleRemove, blogService, setBlogs}) => {
     setBlogs(blogs)
   }
 
-
+  const handleBlogRemoval = () => {
+    handleRemove(blog)
+  }
 
   return (
   <div  style={blogStyle}>
@@ -35,7 +37,7 @@ const Blog = ({blog, handleRemove, blogService, setBlogs}) => {
    likes {blog.likes}  
    <button onClick={handleLikeChange}>like</button> <br />
     {blog.author}<br/>
-    <button onClick={handleRemove}>remove</button>
+    <button onClick={handleBlogRemoval}>remove</button>
    {/* <RemoveButton blogs={blogs} blogObject = {blogObject}/> */}
     </ViewToggle>
   </div>  

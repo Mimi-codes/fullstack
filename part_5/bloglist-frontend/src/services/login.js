@@ -5,8 +5,9 @@ import axios from 'axios'
 const baseUrl = '/api/login'
 
 //uses the async/await syntax instead of promises
-const login = async credentials => {
+const login = async (credentials) => {
   const response = await axios.post(baseUrl, credentials)
+  // console.log(response.data)
   return response.data
 }
 

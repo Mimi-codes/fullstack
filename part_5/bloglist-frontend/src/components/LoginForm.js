@@ -1,5 +1,5 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
   //helper function that shows only if the user is not logged-in 
 const LoginForm = ({handleLogin, handleUsername, handlePassword}) => {
   return (
@@ -16,6 +16,12 @@ const LoginForm = ({handleLogin, handleUsername, handlePassword}) => {
    </form>
 </>
     )
+}
+
+LoginForm.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+  handleUsername: PropTypes.func.isRequired,
+  handlePassword: PropTypes.func.isRequired
 }
 
 export default LoginForm

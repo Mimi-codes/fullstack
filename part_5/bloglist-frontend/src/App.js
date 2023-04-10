@@ -3,6 +3,7 @@ import Blog from "./components/Blog";
 import BlogForm from "./components/BlogForm";
 import LoginForm from "./components/LoginForm";
 import Notification from "./components/Notification";
+import RemoveButton from "./components/RemoveButton";
 import Togglable from "./components/Togglable";
 import Toggle from "./components/Togglable";
 import blogService from "./services/blogs";
@@ -14,16 +15,16 @@ const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-  const [newBlog, setNewBlog] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
   const [loginVisible, setLoginVisible] = useState(false);
-
   //fetches the blogs data from database
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
-  }, []);
+    blogService.getAll().then((blogs) => {
+           setBlogs(blogs)
+    })
+  }, [])
 
   //local storage saves the user's login detail even when the browser is refreshed. This is achieved by saving a value corresponding to a certain key to the database with the method setItem and the value of a key can be found with the method getItem.
   //here, using the useEffect hook, the application checks if user details of a logged-in user can already be found on the local storage. If they can, the details are saved to the state of the application and to blogService.
@@ -46,8 +47,10 @@ const App = () => {
     try {
       const user = await loginService.login({
         username,
-        password,
+        password, 
       });
+
+      window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
       //setToken imported from blog.js and changes the value of private variable token in blog.js module
       blogService.setToken(user.token);
       setUser(user);
@@ -65,7 +68,6 @@ const App = () => {
   //event handler that allows user to input values
   const handleUsername = (e) => {
     setUsername(e.target.value);
-    console.log(e.target.value);
   };
 
   //event handler that allows user to input values
@@ -96,8 +98,7 @@ const loginCancelHandler = (e) => {
   }
   
 
-   //blog object
-   
+   // creates new blog
   const addBlog = (e) => {
     e.preventDefault();
     const blogObject = {
@@ -106,7 +107,6 @@ const loginCancelHandler = (e) => {
       url,
     };
     // console.log('button clicked', e.target)
-
     blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog));
       // setNewBlog('')
@@ -117,12 +117,38 @@ const loginCancelHandler = (e) => {
       setErrorMessage(null);
     }, 5000);
   };
+  // console.log(blogs);
+
+  
+    const increaseLike = (blogObject) => {
+    blogService.update(blogObject.id, blogObject).then((returnedBlog) => {
+      setBlogs(
+        blogs.map((elem) => (elem.id === returnedBlog.id ? returnedBlog : elem))
+      );
+      console.log(returnedBlog);
+    });
+  };
+  
 
   //handles logging out of user
   const handleLogout = () => {
     window.localStorage.removeItem("loggedBlogappUser");
     setUser(null);
   };
+
+  //removes blog 
+  
+  const handleRemove = (blogObject) => {
+    if (
+      window.confirm(`Remove blog ${blogObject.title} by ${blogObject.author}`)
+    ) {
+      setBlogs(blogs.filter((elem) => blogObject.id !== elem.id));
+      blogService.remove(blogObject.id);
+    }
+    console.log(blogObject, 'error')
+  }
+  
+  // console.log(blogs);
 
   return (
     <>
@@ -158,8 +184,18 @@ const loginCancelHandler = (e) => {
     handleUrlChange = {urlHandler}
     />
   </Togglable>
-          {blogs.map((blog) => (
-            <Blog key={blog.id} blog={blog} />
+
+          {blogs.length < 1 ? 'No blog' : blogs.map((blog, i) => (
+            <>
+            <Blog 
+            key={'blog'+ i} 
+            blog={blog}
+            setBlogs = {setBlogs}
+            blogService = {blogService}
+          handleRemove = {handleRemove}
+          increaseLike = {increaseLike}
+            />
+          </>
           ))}
           
         </div>

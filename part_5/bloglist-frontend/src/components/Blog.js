@@ -2,7 +2,7 @@ import RemoveButton from "./RemoveButton"
 import ViewToggle from "./ViewToggle"
 
 //handles the details of the blog when toggled and adds a little bit of styling to the blogs
-const Blog = ({blog, handleRemove, blogService, setBlogs}) => {
+const Blog = ({blog, handleRemove, increaseLike, blogService, setBlogs}) => {
  
   const blogStyle = {
     paddingTop: 1,
@@ -13,18 +13,7 @@ const Blog = ({blog, handleRemove, blogService, setBlogs}) => {
     marginTop: 6
   }
 
-  const handleLikeChange = async (blog) => {
-    await blogService.update(blog.id, {
-      'title': blog.title,
-      'author': blog.author,
-      'url': blog.url,
-      'likes': blog.likes + 1,
-    })
-
-    const blogs = await blogService.getAll()
-    setBlogs(blogs)
-  }
-
+ 
   const handleBlogRemoval = () => {
     handleRemove(blog)
   }
@@ -35,7 +24,7 @@ const Blog = ({blog, handleRemove, blogService, setBlogs}) => {
     <ViewToggle buttonLabel='view'>
   https://{blog.url}/ <br/>
    likes {blog.likes}  
-   <button onClick={handleLikeChange}>like</button> <br />
+   <button onClick={increaseLike}>like</button> <br />
     {blog.author}<br/>
     <button onClick={handleBlogRemoval}>remove</button>
    {/* <RemoveButton blogs={blogs} blogObject = {blogObject}/> */}

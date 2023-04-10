@@ -1,6 +1,5 @@
-// password hash is the output of a one-way hash function applied to the user's password.
 
-import mongoose from 'mongoose'
+const mongoose = require("mongoose");
 
 //creates new user using schema
 const userSchema = new mongoose.Schema({
@@ -27,4 +26,4 @@ userSchema.set("toJSON", {
 
 const User = mongoose.model("User", userSchema);
 
-export {User}
+module.exports = User;

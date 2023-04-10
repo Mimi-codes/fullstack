@@ -119,8 +119,6 @@ const loginCancelHandler = (e) => {
   };
   // console.log(blogs);
 
-  //handles likes
-  
 
   //handles logging out of user
   const handleLogout = () => {
@@ -129,7 +127,6 @@ const loginCancelHandler = (e) => {
   };
 
   //removes blog 
-  
   const handleRemove = (blogObject) => {
     if (
       window.confirm(`Remove blog ${blogObject.title} by ${blogObject.author}`)
@@ -139,8 +136,7 @@ const loginCancelHandler = (e) => {
     }
     console.log(blogObject, 'error')
   }
-  
-  // console.log(blogs);
+
 
   return (
     <>
@@ -185,7 +181,7 @@ const loginCancelHandler = (e) => {
             setBlogs = {setBlogs}
             blogService = {blogService}
           handleRemove = {handleRemove}
-          // increaseLike = {increaseLike}
+          likeHandler = {blog.likes}
             />
           </>
           ))}

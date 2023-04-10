@@ -1,9 +1,14 @@
-import RemoveButton from "./RemoveButton"
+import { useState } from "react"
 import ViewToggle from "./ViewToggle"
 
 //handles the details of the blog when toggled and adds a little bit of styling to the blogs
-const Blog = ({blog, handleRemove, blogService, update}) => {
- 
+const Blog = ({blog, likeHandler, handleRemove}) => {
+  //state updating function of the likes
+ const [like, setLike] = useState(likeHandler)
+const increase = () => {
+setLike(like + 1)
+}
+
   const blogStyle = {
     paddingTop: 1,
     paddingLeft: 2,
@@ -18,28 +23,22 @@ const Blog = ({blog, handleRemove, blogService, update}) => {
     handleRemove(blog)
   }
 
-  
-  const likeHandler = async () => {
-    blogService
-        .likeBlog(blog)
-        // .then(() => {
-            // update(blog)
-        // })
-        console.log('clicked')
-}
-
 
   return (
   <div  style={blogStyle}>
     {blog.title} {blog.author}
     <ViewToggle buttonLabel='view'>
   https://{blog.url}/ <br/>
-   likes {blog.likes}  
-   <button onClick={likeHandler}>like</button> <br />
+   {/* likes {blog.likes}   */}
+   likes {like}  
+   <button onClick={increase}>like</button> <br />
     {blog.author}<br/>
     <button onClick={handleBlogRemoval}>remove</button>
    {/* <RemoveButton blogs={blogs} blogObject = {blogObject}/> */}
+   
     </ViewToggle>
+    {/* <p>{like}</p> */}
+   
   </div>  
 )
   }

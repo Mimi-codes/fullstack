@@ -28,6 +28,14 @@ const create = async newObject => {
   return response.data
 }
 
+
+const likeBlog = (blog) => {
+  const likedBlog = blog
+  likedBlog.likes = blog.likes + 1
+  return axios.put(`${baseUrl}/${blog.id}`, likedBlog)
+}
+
+
 const remove = async (id) => {
   const config = {
     headers: { Authorization: token },
@@ -37,10 +45,10 @@ const remove = async (id) => {
 }
 
 const update = async (id, newObject) => {
-  const request = axios.put(`${ baseUrl }/${id}`, newObject)
-  return request.then(response => response.data)
-}
+  const request = axios.put(`${baseUrl}/${id}`, newObject);
+  return request.then((response) => response.data);
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, create, update, setToken, remove }
+export default { getAll, create, update, setToken, remove, likeBlog }
 

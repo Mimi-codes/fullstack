@@ -119,15 +119,7 @@ const loginCancelHandler = (e) => {
   };
   // console.log(blogs);
 
-  
-    const increaseLike = (blogObject) => {
-    blogService.update(blogObject.id, blogObject).then((returnedBlog) => {
-      setBlogs(
-        blogs.map((elem) => (elem.id === returnedBlog.id ? returnedBlog : elem))
-      );
-      console.log(returnedBlog);
-    });
-  };
+  //handles likes
   
 
   //handles logging out of user
@@ -193,7 +185,7 @@ const loginCancelHandler = (e) => {
             setBlogs = {setBlogs}
             blogService = {blogService}
           handleRemove = {handleRemove}
-          increaseLike = {increaseLike}
+          // increaseLike = {increaseLike}
             />
           </>
           ))}

@@ -11,20 +11,21 @@ const RemoveButton = ({ blogs, blogObject, blogService, setBlogs}) => {
     backgroundColor: 'blue'
     }
 
-    const removeBlog = (blogObject) => {
-        if (
-          window.confirm(`Remove blog ${blogObject.title} by ${blogObject.author}`)
-        ) {
-          setBlogs(blogs.filter((elem) => blogObject.id !== elem.id));
-          blogService.remove(blogObject.id);
-        }
-      };
-    
+    const handleRemove = (blogObject) => {
+      if (
+        window.confirm(`Remove blog ${blogObject.title} by ${blogObject.author}`)
+      ) {
+        setBlogs(blogs.filter((elem) => blogObject.id !== elem.id));
+        blogService.remove(blogObject.id);
+      }
+      console.log(blogObject, 'error')
+    }
+  
         
 
   return (
     <>
-    <button type='button' style={removeStyle} onClick={removeBlog}>remove</button>
+    <button type='button' style={removeStyle} onClick={handleRemove}>remove</button>
     </>
   )
 }

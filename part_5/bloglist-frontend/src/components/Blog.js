@@ -1,8 +1,9 @@
 import { useState } from "react"
+import RemoveButton from "./RemoveButton"
 import ViewToggle from "./ViewToggle"
 
 //handles the details of the blog when toggled and adds a little bit of styling to the blogs
-const Blog = ({blog, likeHandler, handleRemove}) => {
+const Blog = ({blog, likeHandler, handleRemove, blogObject}) => {
   //state updating function of the likes
  const [like, setLike] = useState(likeHandler)
 const increase = () => {
@@ -18,6 +19,15 @@ setLike(like + 1)
     marginTop: 6
   }
 
+  const removeStyle = {
+    paddingTop: 1,
+paddingLeft: 4,
+border: 'none',
+borderRadius: 3,
+borderWidth: 1,
+marginBottom: 5,
+backgroundColor: 'blue'
+}
  
   const handleBlogRemoval = () => {
     handleRemove(blog)
@@ -28,16 +38,14 @@ setLike(like + 1)
   <div  style={blogStyle}>
     {blog.title} {blog.author}
     <ViewToggle buttonLabel='view'>
-  https://{blog.url}/ <br/>
-   {/* likes {blog.likes}   */}
-   likes {like}  
+https://{blog.url}/ <br/>
+likes {like} 
    <button onClick={increase}>like</button> <br />
     {blog.author}<br/>
-    <button onClick={handleBlogRemoval}>remove</button>
+    <button onClick={handleBlogRemoval} style={removeStyle}>remove</button>
    {/* <RemoveButton blogs={blogs} blogObject = {blogObject}/> */}
-   
+ 
     </ViewToggle>
-    {/* <p>{like}</p> */}
    
   </div>  
 )

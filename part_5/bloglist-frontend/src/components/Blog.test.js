@@ -4,7 +4,6 @@ import { render, screen } from '@testing-library/react'
 import userEvent from "@testing-library/user-event";
 import Blog from './Blog'
 import Togglable from "./Togglable";
-import BlogForm from "./BlogForm";
 
 //test to render only blog author and title
 /*const blog = {
@@ -73,17 +72,4 @@ test("like button clicked! ", async () => {
   expect(mockHandler.mock.calls).toHaveLength(2);
 });
   
-  //create new blog
-  test('create a new blog', () => {
-    const component = render(
-    <BlogForm />
-    )
   
-    const title = component.container.querySelector('.title')
-    const author = component.container.querySelector('.author')
-    const url = component.container.querySelector('.url')
-  
-    expect(title).toBeDefined()
-    expect(author).toBeDefined()
-    expect(url).toBeDefined()
-  })

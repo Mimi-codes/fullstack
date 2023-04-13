@@ -11,9 +11,9 @@ test('create a new blog', () => {
     <BlogForm />
     )
   
-    const title = component.container.querySelector('.title')
-    const author = component.container.querySelector('.author')
-    const url = component.container.querySelector('.url')
+    const title = component.container.querySelector('#title')
+    const author = component.container.querySelector('#author')
+    const url = component.container.querySelector('#url')
   
     expect(title).toBeDefined()
     expect(author).toBeDefined()

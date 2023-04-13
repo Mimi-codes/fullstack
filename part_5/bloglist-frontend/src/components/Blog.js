@@ -35,9 +35,9 @@ backgroundColor: 'blue'
 
 
   return (
-  <div  style={blogStyle}>
+  <div  style={blogStyle} className="blog">
     {blog.title} {blog.author}
-    <ViewToggle buttonLabel='view'>
+    <ViewToggle buttonLabel='view' className = 'togglableContent'>
 https://{blog.url}/ <br/>
 likes {like} 
    <button onClick={increase}>like</button> <br />

@@ -134,7 +134,7 @@ const loginCancelHandler = (e) => {
       setBlogs(blogs.filter((elem) => blogObject.id !== elem.id));
       blogService.remove(blogObject.id);
     }
-    console.log(blogObject, 'error')
+    // console.log(blogObject, 'error')
   }
 
 

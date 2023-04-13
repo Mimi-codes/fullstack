@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from "@testing-library/user-event";
 import Blog from './Blog'
 import Togglable from "./Togglable";
+import BlogForm from "./BlogForm";
 
 //test to render only blog author and title
 /*const blog = {
@@ -50,5 +51,39 @@ describe("<Blog/>", () => {
     expect(div).toBeDefined();
   });
 })
+
+//like button is clicked twice
+test("like button clicked! ", async () => {
+  const blog = {
+    title: 'A test',
+    author: 'Mimi',
+    url: 'www.mimi.com',
+    likes: 20
+  }
+
+  const mockHandler = jest.fn();
+  render(<Blog blog={blog} likeHandler={mockHandler} />);
+  const user = userEvent.setup();
+  const button = screen.getByText("view");
+  await user.click(button);
+
+  const likeButton = screen.getByText("like");
+   await user.click(likeButton);
+ await user.click(likeButton);
+  expect(mockHandler.mock.calls).toHaveLength(2);
+});
   
+  //create new blog
+  test('create a new blog', () => {
+    const component = render(
+    <BlogForm />
+    )
   
+    const title = component.container.querySelector('.title')
+    const author = component.container.querySelector('.author')
+    const url = component.container.querySelector('.url')
+  
+    expect(title).toBeDefined()
+    expect(author).toBeDefined()
+    expect(url).toBeDefined()
+  })

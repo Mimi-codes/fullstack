@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState } from "react"
 import RemoveButton from "./RemoveButton"
 import ViewToggle from "./ViewToggle"

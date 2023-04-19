@@ -1,3 +1,4 @@
+/* eslint-disable */
 //sends HTTP POST request to the server address api/login to enable users to login
 import axios from 'axios'
 

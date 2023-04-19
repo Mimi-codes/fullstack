@@ -4,9 +4,9 @@ describe('Blog app', function() {
 		cy.visit('http://localhost:3000')
 
 		const user = {
-      name: 'Zoro',
-      username: 'Zoro',
-      password: 'sword'
+      name: 'Mariam',
+      username: 'mimi',
+      password: 'confidential'
     }
     cy.request('POST', 'http://localhost:3001/api/users/', user)
 

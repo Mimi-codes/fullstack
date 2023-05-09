@@ -21,7 +21,7 @@ const BlogForm = ({ addBlog, titleValue, handleTitleChange, authorValue, handleA
           url: <input type="text" value={urlValue} onChange={handleUrlChange}
           id='url' />  <br />
           {/* <input value={newBlog} onChange={handleBlogChange} /> */}
-          <button type="submit">save</button>
+          <button id='create-btn' type="submit">save</button>
         </form>
     </>
   )

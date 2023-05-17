@@ -1,24 +1,19 @@
-import { useSelector, useDispatch } from 'react-redux'
-import reducer from './reducers/anecdoteReducer'
-import AnecdoteForm from './components/AnecdoteForm'
-import AnecdoteList from './components/AnecdoteList'
+import React from "react";
+import AnecdoteList from "./components/AnecdoteList";
+import AnecdoteForm from "./components/AnecdoteForm";
+import Notification from "./components/Notification";
+import Filter from "./components/Filter";
 
 const App = () => {
-  const anecdotes = useSelector(state => state)
-  const dispatch = useDispatch()
-
-  const vote = (id) => {
-    console.log('vote', id)
-    dispatch(reducer(vote))
-  }
-
   return (
     <div>
       <h2>Anecdotes</h2>
-<AnecdoteForm />
-<AnecdoteList />
+      <Notification />
+      <Filter />
+      <AnecdoteList />
+      <AnecdoteForm />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

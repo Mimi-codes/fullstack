@@ -25,4 +25,11 @@ console.log(store.getState())
   console.log(storeNow)
 })
 
+- Action creators are functions that create actions
+
+### Forwarding Redux Store to various components
+- This is basically the separation of our files like App.js into its module and this is possible by:
+a. Install react-redux library using 'npm install react-redux'
+b. Define the application as a child of a provider component provided by the react-redux library.
+c. useSelector and useDispatch hooks are imported from react-redux library. The latter is saved in a dispatch variable which now used to dispatch actions and useSelector is also saved in a variable and used accordingly. 
 

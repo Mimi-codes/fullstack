@@ -34,6 +34,6 @@ const AnecdoteList = () => {
       </div>
     </div>
   ));
-};
+}; 
 
 export default AnecdoteList;

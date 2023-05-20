@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import About from './components/About'
 import CreateNew from './components/CreateNew'
 import AnecdoteList from './components/AnecdoteList'
+import Anecdote from './components/Anecdote'
 
 
 const App = () => {
@@ -60,6 +61,7 @@ const App = () => {
     </div>
 
         <Routes>
+          <Route path='/anecdotes/:id' element={<Anecdote anecdotes={anecdotes} />} />
           <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />}/>
           <Route path='/create' element={<CreateNew addNew={addNew} />}/>
           <Route path='/about' element={<About />}/>

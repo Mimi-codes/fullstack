@@ -1,20 +1,16 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Footer from './components/Footer'
-import Menu from './components/Menu'
 import About from './components/About'
 import CreateNew from './components/CreateNew'
 import AnecdoteList from './components/AnecdoteList'
 
 
-
-
-
-
-
-
-
-
 const App = () => {
+  const padding = {
+    paddingRight: 5
+  }
+
   const [anecdotes, setAnecdotes] = useState([
     {
       content: 'If it hurts, do it more often',
@@ -56,10 +52,19 @@ const App = () => {
   return (
     <div>
       <h1>Software anecdotes</h1>
-     <Menu />
-     <AnecdoteList anecdotes={anecdotes} />
-     <About />
-<CreateNew addNew={addNew}  />
+      <Router>
+      <div>
+      <Link style={padding} to = '/'>anecdotes</Link>
+      <Link style={padding} to = '/create'>create new</Link>
+      <Link style={padding} to = '/about'>about</Link>
+    </div>
+
+        <Routes>
+          <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />}/>
+          <Route path='/create' element={<CreateNew addNew={addNew} />}/>
+          <Route path='/about' element={<About />}/>
+        </Routes>
+      </Router>
     <Footer />
     </div>
   )

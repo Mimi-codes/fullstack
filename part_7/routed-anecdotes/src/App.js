@@ -1,10 +1,11 @@
-import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { useState, useEffect} from 'react'
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import Footer from './components/Footer'
 import About from './components/About'
 import CreateNew from './components/CreateNew'
 import AnecdoteList from './components/AnecdoteList'
 import Anecdote from './components/Anecdote'
+import Notification from './components/Notification'
 
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
     paddingRight: 5
   }
 
+  const [notification, setNotification] = useState('')
   const [anecdotes, setAnecdotes] = useState([
     {
       content: 'If it hurts, do it more often',
@@ -28,13 +30,17 @@ const App = () => {
       id: 2
     }
   ])
-
-  const [notification, setNotification] = useState('')
+  
 
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
-  }
+    setNotification(
+      `a new blog "${anecdote.content}" by ${anecdote.author} added`
+    );
+    setTimeout(() => {
+      setNotification("");
+    }, 5000);  }
 
   const anecdoteById = (id) =>
     anecdotes.find(a => a.id === id)
@@ -53,6 +59,7 @@ const App = () => {
   return (
     <div>
       <h1>Software anecdotes</h1>
+      <Notification notification={notification} />
       <Router>
       <div>
       <Link style={padding} to = '/'>anecdotes</Link>
